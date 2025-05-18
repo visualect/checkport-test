@@ -3,14 +3,14 @@ import { Select as SelectPrimitive } from "radix-ui";
 import { IoIosArrowDown } from "react-icons/io";
 
 interface ISelect {
-  options: string[];
   value: string;
   onChange: (newVal: string) => void;
   placeholder?: string;
+  children: React.ReactNode;
 }
 
 export default function Select({
-  options,
+  children,
   value,
   onChange,
   placeholder = "Выберите значение",
@@ -39,15 +39,25 @@ export default function Select({
           className="overflow-hidden rounded-md bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]"
         >
           <SelectPrimitive.Viewport className="p-[5px] transition-transform duration-300">
-            {options.map((option) => {
-              return <SelectItem value={option}>{option}</SelectItem>;
-            })}
+            {children}
+            {/* {options.map((option) => { */}
+            {/*   return <SelectItem value={option}>{option}</SelectItem>; */}
+            {/* })} */}
           </SelectPrimitive.Viewport>
         </SelectPrimitive.Content>
       </SelectPrimitive.Portal>
     </SelectPrimitive.Root>
   );
 }
+
+interface Props {
+  value: number | string;
+  label: string;
+}
+
+export const Option = ({ value, label }: Props) => {
+  return <SelectItem value={value}>{label}</SelectItem>;
+};
 
 const SelectItem = React.forwardRef(
   ({ children, className, ...props }, forwardedRef) => {

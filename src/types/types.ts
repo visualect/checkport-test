@@ -8,7 +8,12 @@ export type TT = {
   name: string;
 };
 
-export type Menu = {
+export interface MenuData {
+  max_pages: number;
+  data: TMenu[];
+}
+
+export type TMenu = {
   id: number;
   name: string;
   filial: Filial;
