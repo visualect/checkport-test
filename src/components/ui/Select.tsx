@@ -27,7 +27,7 @@ export function Select({
       onOpenChange={setOpen}
       defaultValue={defaultValue}
     >
-      <SelectPrimitive.Trigger className="flex items-center justify-between gap-2 py-[6px] px-[10px] h-[30px] rounded-c-medium w-full border border-c-dark-blue text-base placeholder:text-base placeholder:text-c-dark-blue/80 focus:outline-none">
+      <SelectPrimitive.Trigger className="flex items-center justify-between gap-2 py-[8px] px-[14px] bg-white h-[35px] rounded-c-medium w-full !text-[13px]  border border-gray-200 focus:outline-none">
         <SelectPrimitive.Value placeholder={placeholder} />
         <SelectPrimitive.Icon
           className={`${open && "rotate-180"} transition-transform`}
@@ -39,7 +39,7 @@ export function Select({
       <SelectPrimitive.Portal>
         <SelectPrimitive.Content
           position="popper"
-          className="overflow-hidden rounded-md bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]"
+          className="overflow-hidden rounded-c-medium bg-white shadow-md"
         >
           <SelectPrimitive.Viewport className="p-[5px] transition-transform duration-300">
             {children}
@@ -60,7 +60,7 @@ export const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
     return (
       <SelectPrimitive.Item
         className={
-          "relative flex h-[25px] select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none text-violet11 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1 data-[highlighted]:outline-none"
+          "relative flex h-[25px] select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-gray-100 data-[highlighted]:outline-none ease-out transition-colors"
         }
         {...props}
         ref={forwardedRef}

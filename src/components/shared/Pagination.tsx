@@ -6,7 +6,8 @@ interface IPagination {
 }
 
 export default function Pagination({ data, handleFiltering }: IPagination) {
-  if (!data) return null;
+  if (!data || data.max_pages === 1) return null;
+
   return (
     <ul className="flex justify-center items-center gap-2 w-full">
       {Array.from({ length: data.max_pages }, (_, i) => i + 1)
@@ -14,7 +15,7 @@ export default function Pagination({ data, handleFiltering }: IPagination) {
         .map((n) => (
           <li
             onClick={() => handleFiltering("page", String(n))}
-            className="cursor-pointer"
+            className="px-3 py-2 bg-white text-[13px] border border-gray-200 rounded-c-medium cursor-pointer"
           >
             {n}
           </li>

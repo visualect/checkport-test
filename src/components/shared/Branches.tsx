@@ -19,9 +19,9 @@ export default function Branches({
   onFilialSelect,
 }: IBranches) {
   return (
-    <div className="flex flex-col gap-[10px]">
-      <div className="flex flex-col gap-[5px] pb-[10px] border-b border-c-dark-blue">
-        <label className="text-c-dark-blue/50">Филиалы</label>
+    <div className="flex flex-col gap-[10px] bg-white rounded-c-medium p-[15px] shadow-lg">
+      <div className="flex flex-col gap-[5px] pb-[10px] border-b border-gray-200">
+        <label className="text-c-gray text-sm">Филиалы</label>
         {filials.length > 0 ? (
           <Select
             onChange={(newVal) => onFilialSelect(newVal)}
@@ -35,7 +35,9 @@ export default function Branches({
             ))}
           </Select>
         ) : (
-          <p className="h-[30px]">Загрузка...</p>
+          <p className="flex w-full justify-center items-center text-[13px] h-[35px]">
+            Загрузка...
+          </p>
         )}
       </div>
       <Menu onMenuSelect={onMenuSelect} activeMenu={activeMenu} />

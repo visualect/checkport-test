@@ -5,14 +5,14 @@ interface Props {
 
 export default function Menu({ onMenuSelect, activeMenu }: Props) {
   return (
-    <ul className="flex flex-col gap-[10px]">
+    <ul className="flex flex-col gap-2">
       {MENU_ITEMS.map((item) => (
         <li
           onClick={() => onMenuSelect(item.name)}
           key={item.name}
-          className={` ${activeMenu === item.name ? "bg-blue-950 text-white" : "text-c-dark-blue bg-transparent"}cursor-pointer p-[5px_10px] hover:shadow-[0_4px_4px_rgba(0,0,0,0.25)] ease-out transition`}
+          className={` ${activeMenu === item.name ? "bg-c-dark-blue text-white" : "text-c-dark-blue bg-transparent"} text-sm rounded-c-medium cursor-pointer p-[5px_10px] ease-out transition`}
         >
-          - {item.label}
+          {item.label}
         </li>
       ))}
     </ul>

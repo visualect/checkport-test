@@ -1,25 +1,25 @@
-import Logo from "./Logo";
 import { IoDocumentTextOutline } from "react-icons/io5";
 
 interface ICompanyInfo {
   name: string;
   owner: string;
-  logo: string | null;
 }
 
-export default function CompanyInfo({ name, owner, logo }: ICompanyInfo) {
+export default function CompanyInfo({ name, owner }: ICompanyInfo) {
   return (
-    <div className="flex flex-col gap-2 px-[15px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-      <div className="flex items-center gap-3 py-[10px] border-b border-c-dark-blue">
-        <Logo src={logo} />
+    <div className="flex flex-col px-[15px] shadow-lg bg-white rounded-c-medium">
+      <div className="flex items-center gap-2 py-[10px] border-b border-gray-200">
+        <div className="flex justify-center items-center bg-orange-600 rounded-full aspect-square h-auto w-[42px] text-white text-lg font-semibold">
+          Ф
+        </div>
         <div className="flex flex-col">
-          <h1 className="text-lg font-semibold">{name}</h1>
-          <h2 className="opacity-80">{owner}</h2>
+          <h1 className="text-sm font-medium">{name}</h1>
+          <h2 className="text-gray-500 text-sm opacity-80">{owner}</h2>
         </div>
       </div>
-      <div className="flex items-center gap-[10px] py-[10px]">
-        <IoDocumentTextOutline size={42} className="text-c-dark-blue" />
-        <p className="font-semibold text-lg ">СКЛАДСКОЙ УЧЁТ</p>
+      <div className="flex justify-center items-center gap-[10px] py-[10px]">
+        <IoDocumentTextOutline size={16} className="text-c-dark-blue" />
+        <p className="font-medium text-sm ">СКЛАДСКОЙ УЧЁТ</p>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ export default function Input({
 }: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
-      className="p-[5px_10px] text-lg border rounded-c-medium border-c-dark-blue w-full h-[30px]"
+      className="p-[8px_14px] !text-[13px] border rounded-c-medium bg-white border-gray-200 w-full h-[35px] focus:outline-none"
       {...props}
     />
   );

@@ -27,12 +27,8 @@ function App() {
       className="container text-c-dark-blue"
     >
       <div className="grid grid-cols-10 gap-8 py-10">
-        <div className="col-span-2 w-full flex flex-col gap-[15px]">
-          <CompanyInfo
-            name="Название компании"
-            owner="Лоскутникова В.П."
-            logo={null}
-          />
+        <div className="col-span-2 w-full flex flex-col gap-[24px]">
+          <CompanyInfo name="Назв. компании" owner="Лоскутникова В.П." />
           <Branches
             filials={filials}
             setFilials={setFilials}

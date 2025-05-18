@@ -6,9 +6,10 @@ interface IFilters {
   handleFiltering: (key: keyof IQueryParams, newVal: string) => void;
   queryParams: IQueryParams;
 }
+
 export default function Filters({ handleFiltering, queryParams }: IFilters) {
   return (
-    <div className="grid grid-cols-6 gap-4 w-full pb-5 border-b border-c-dark-blue">
+    <div className="grid grid-cols-6 items-center gap-4 w-full pb-5 border-b border-gray-200">
       <Input
         value={queryParams.name}
         placeholder="Название меню"
@@ -37,7 +38,7 @@ export default function Filters({ handleFiltering, queryParams }: IFilters) {
           </SelectItem>
         ))}
       </Select>
-      <p className="text-[18px] font-medium opacity-80">Экспорт</p>
+      <p className="text-[13px] font-medium opacity-80">Экспорт</p>
     </div>
   );
 }
