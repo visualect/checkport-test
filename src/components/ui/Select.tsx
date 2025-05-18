@@ -6,13 +6,15 @@ interface ISelect {
   value: string;
   onChange: (newVal: string) => void;
   placeholder?: string;
+  defaultValue?: string;
   children: React.ReactNode;
 }
 
-export default function Select({
+export function Select({
   children,
   value,
   onChange,
+  defaultValue,
   placeholder = "Выберите значение",
 }: ISelect) {
   const [open, setOpen] = React.useState(false);
@@ -23,6 +25,7 @@ export default function Select({
       onValueChange={(newVal) => onChange(newVal)}
       open={open}
       onOpenChange={setOpen}
+      defaultValue={defaultValue}
     >
       <SelectPrimitive.Trigger className="flex items-center justify-between gap-2 py-[6px] px-[10px] h-[30px] rounded-c-medium w-full border border-c-dark-blue text-base placeholder:text-base placeholder:text-c-dark-blue/80 focus:outline-none">
         <SelectPrimitive.Value placeholder={placeholder} />
@@ -40,9 +43,6 @@ export default function Select({
         >
           <SelectPrimitive.Viewport className="p-[5px] transition-transform duration-300">
             {children}
-            {/* {options.map((option) => { */}
-            {/*   return <SelectItem value={option}>{option}</SelectItem>; */}
-            {/* })} */}
           </SelectPrimitive.Viewport>
         </SelectPrimitive.Content>
       </SelectPrimitive.Portal>
@@ -50,16 +50,12 @@ export default function Select({
   );
 }
 
-interface Props {
-  value: number | string;
-  label: string;
+interface SelectItemProps
+  extends React.ComponentProps<typeof SelectPrimitive.Item> {
+  children: React.ReactNode;
 }
 
-export const Option = ({ value, label }: Props) => {
-  return <SelectItem value={value}>{label}</SelectItem>;
-};
-
-const SelectItem = React.forwardRef(
+export const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
   ({ children, className, ...props }, forwardedRef) => {
     return (
       <SelectPrimitive.Item

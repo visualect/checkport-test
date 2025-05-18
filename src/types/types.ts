@@ -28,5 +28,5 @@ export interface IQueryParams {
   name: string;
   filial: string;
   tt: string;
-  active: "no_active" | "active" | null;
+  active: "no_active" | "active" | "";
 }

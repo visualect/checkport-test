@@ -1,12 +1,12 @@
-import Select, { Option } from "../ui/Select";
 import Menu from "./Menu";
 import type { Filial } from "../../types/types";
+import { Select, SelectItem } from "../ui/Select";
 
 interface IBranches {
   filials: Filial[];
   setFilials: (newFilials: Filial[]) => void;
-  activeFilial: string | null;
-  activeMenu: string | null;
+  activeFilial: string;
+  activeMenu: string;
   onMenuSelect: (newVal: string) => void;
   onFilialSelect: (newVal: string) => void;
 }
@@ -25,11 +25,13 @@ export default function Branches({
         {filials.length > 0 ? (
           <Select
             onChange={(newVal) => onFilialSelect(newVal)}
-            value={activeFilial ?? ""}
+            value={activeFilial}
             placeholder="Выберите город"
           >
             {filials.map((f) => (
-              <Option key={f.id} value={f.id} label={f.name} />
+              <SelectItem key={f.id} value={String(f.id)}>
+                {f.name}
+              </SelectItem>
             ))}
           </Select>
         ) : (
