@@ -20,7 +20,7 @@ export default function Table({ data }: ITable) {
       <tbody className="flex flex-col gap-4">
         {data.data.map((menu) => (
           <tr className="grid grid-cols-6 gap-4 border-b border-gray-200 pb-2">
-            <td className="truncate">{menu.name}</td>
+            <td className="line-clamp-3 text-wrap">{menu.name}</td>
             <td className="truncate">{menu.filial.name}</td>
             <td className="truncate">{menu.tt.name}</td>
             <td>{menu.active ? "Активно" : "Не активно"}</td>

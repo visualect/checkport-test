@@ -19,7 +19,7 @@ export default function Branches({
   onFilialSelect,
 }: IBranches) {
   return (
-    <div className="flex flex-col gap-[10px] bg-white rounded-c-medium p-[15px] shadow-lg">
+    <div className="flex flex-col gap-[10px] bg-white rounded-c-medium p-[15px] border-gray-200 border">
       <div className="flex flex-col gap-[5px] pb-[10px] border-b border-gray-200">
         <label className="text-c-gray text-sm">Филиалы</label>
         {filials.length > 0 ? (

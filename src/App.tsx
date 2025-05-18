@@ -27,7 +27,7 @@ function App() {
       className="container text-c-dark-blue"
     >
       <div className="grid grid-cols-10 gap-8 py-10">
-        <div className="col-span-2 w-full flex flex-col gap-[24px]">
+        <div className="col-span-full lg:col-span-2 w-full flex flex-col gap-[24px]">
           <CompanyInfo name="Назв. компании" owner="Лоскутникова В.П." />
           <Branches
             filials={filials}
@@ -38,12 +38,16 @@ function App() {
             onFilialSelect={setSelectedFilial}
           />
         </div>
-        <div className="col-span-8 flex flex-col gap-[30px] w-full">
-          <Filters
-            queryParams={queryParams}
-            handleFiltering={handleFiltering}
-          />
-          <Table data={menuData} />
+        <div className="col-span-full lg:col-span-8 flex flex-col gap-[30px] w-full">
+          <div className="w-full overflow-auto">
+            <div className="min-w-[800px]">
+              <Filters
+                queryParams={queryParams}
+                handleFiltering={handleFiltering}
+              />
+              <Table data={menuData} />
+            </div>
+          </div>
           <Pagination data={menuData} handleFiltering={handleFiltering} />
         </div>
       </div>
