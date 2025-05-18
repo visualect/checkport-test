@@ -21,3 +21,12 @@ export type TMenu = {
   active: boolean;
   export: string[];
 };
+
+export interface IQueryParams {
+  limit: number;
+  page: number;
+  name: string;
+  filial: string;
+  tt: string;
+  active: "no_active" | "active" | null;
+}

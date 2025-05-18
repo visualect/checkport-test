@@ -1,6 +1,6 @@
 interface Props {
   onMenuSelect: (newVal: string) => void;
-  activeMenu: string;
+  activeMenu: string | null;
 }
 
 export default function Menu({ onMenuSelect, activeMenu }: Props) {

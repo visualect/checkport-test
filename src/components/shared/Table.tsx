@@ -9,9 +9,9 @@ export default function Table({ data }: ITable) {
 
   return (
     <table className="w-full">
-      <tbody>
+      <tbody className="flex flex-col gap-4">
         {data.data.map((menu) => (
-          <tr className="grid grid-cols-6">
+          <tr className="grid grid-cols-6 gap-4">
             <td>{menu.name}</td>
             <td>{menu.filial.name}</td>
             <td>{menu.tt.name}</td>

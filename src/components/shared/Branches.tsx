@@ -4,10 +4,10 @@ import type { Filial } from "../../types/types";
 
 interface IBranches {
   filials: Filial[];
-  setFilials: () => void;
-  activeFilial: string;
-  activeMenu: string;
-  onMenuSelect: () => void;
+  setFilials: (newFilials: Filial[]) => void;
+  activeFilial: string | null;
+  activeMenu: string | null;
+  onMenuSelect: (newVal: string) => void;
   onFilialSelect: (newVal: string) => void;
 }
 
@@ -25,7 +25,7 @@ export default function Branches({
         {filials.length > 0 ? (
           <Select
             onChange={(newVal) => onFilialSelect(newVal)}
-            value={activeFilial}
+            value={activeFilial ?? ""}
             placeholder="Выберите город"
           >
             {filials.map((f) => (

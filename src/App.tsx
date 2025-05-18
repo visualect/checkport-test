@@ -1,38 +1,77 @@
 import { useEffect, useState } from "react";
 import Branches from "./components/shared/Branches";
 import CompanyInfo from "./components/shared/CompanyInfo";
-import type { Filial, MenuData } from "./types/types";
+import { type IQueryParams, type Filial, type MenuData } from "./types/types";
 import Filters from "./components/shared/Filters";
 import Table from "./components/shared/Table";
 
 function App() {
   const [filials, setFilials] = useState<Filial[]>([]);
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
-  const [selectedFilial, setSelectedFilial] = useState<number | null>(null);
+  const [selectedFilial, setSelectedFilial] = useState<string | null>(null);
   const [menuData, setMenuData] = useState<MenuData | null>(null);
+  const [queryParams, setQueryParams] = useState<IQueryParams>({
+    limit: 10,
+    page: 1,
+    name: "",
+    filial: "",
+    tt: "",
+    active: null,
+  });
 
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
-  // const [name, setName] = useState("");
-  // const [filial, setFilial] = useState("");
-  // const [tt, setTT] = useState("");
-  // const [status, setStatus] = useState<"active" | "not_active" | "">("");
+  const handleStatusFilter = (newVal: IQueryParams["active"]) => {
+    setQueryParams((prev) => {
+      return {
+        ...prev,
+        active: newVal,
+      };
+    });
+  };
 
-  const fetchMenu = async (id: number, selectedMenu: string) => {
-    const queryParams = `?limit=${limit}&page=${page}`;
+  const handleInputFilter = (key: string, newVal: string) => {
+    setQueryParams((prev) => {
+      return {
+        ...prev,
+        [key]: newVal.trim(),
+      };
+    });
+  };
+
+  const getQueryParams = (params: typeof queryParams) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    for (const [key, value] of Object.entries(params)) {
+      if (value) {
+        searchParams.set(key, String(value));
+      } else {
+        searchParams.delete(key);
+      }
+    }
+    return searchParams;
+  };
+
+  const fetchMenu = async (
+    id: string,
+    selectedMenu: string,
+    queryParams: URLSearchParams,
+  ) => {
     const data = await fetch(
       import.meta.env.VITE_BACKEND_URL +
-        `/filial/${id}/${selectedMenu}/${queryParams}`,
-    ).then((res) => res.json());
+        `/filial/${id}/${selectedMenu}/?${queryParams}`,
+    ).then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    });
     return data;
   };
 
   useEffect(() => {
     let ignore = false;
-    console.log(selectedFilial);
+    const params = getQueryParams(queryParams);
+
     if (selectedFilial && selectedMenu) {
       if (selectedMenu === "menu") {
-        fetchMenu(selectedFilial, selectedMenu).then((data) => {
+        fetchMenu(selectedFilial, selectedMenu, params).then((data) => {
           if (!ignore) {
             setMenuData(data);
           }
@@ -46,7 +85,7 @@ function App() {
     return () => {
       ignore = true;
     };
-  }, [selectedFilial, selectedMenu]);
+  }, [selectedFilial, selectedMenu, queryParams]);
 
   const fetchFilials = async () => {
     const data = await fetch(
@@ -85,14 +124,39 @@ function App() {
             filials={filials}
             setFilials={setFilials}
             activeMenu={selectedMenu}
-            filialValue={selectedFilial}
+            activeFilial={selectedFilial}
             onMenuSelect={setSelectedMenu}
             onFilialSelect={setSelectedFilial}
           />
         </div>
         <div className="col-span-8 flex flex-col gap-[30px] w-full">
-          <Filters />
+          <Filters
+            queryParams={queryParams}
+            handleStatusFilter={handleStatusFilter}
+            handleInputFilter={handleInputFilter}
+          />
           <Table data={menuData} />
+          {menuData && (
+            <ul className="flex justify-center items-center gap-2 w-full">
+              {Array.from({ length: menuData.max_pages }, (_, i) => i + 1)
+                .slice(0, 3)
+                .map((n) => (
+                  <li
+                    onClick={() =>
+                      setQueryParams((prev) => {
+                        return {
+                          ...prev,
+                          page: n,
+                        };
+                      })
+                    }
+                    className="cursor-pointer"
+                  >
+                    {n}
+                  </li>
+                ))}
+            </ul>
+          )}
         </div>
       </div>
     </main>
