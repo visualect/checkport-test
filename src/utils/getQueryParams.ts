@@ -1,4 +1,4 @@
-import type { IQueryParams } from "./types/types";
+import type { IQueryParams } from "../types/types.ts";
 
 const getQueryParams = (params: IQueryParams) => {
   const searchParams = new URLSearchParams(window.location.search);
