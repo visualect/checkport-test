@@ -16,7 +16,7 @@ export default function Table({ data }: ITable) {
     );
 
   return (
-    <table className="w-full text-[13px]">
+    <table className="w-full text-[13px] !mt-10">
       <tbody className="flex flex-col gap-4">
         {data.data.map((menu) => (
           <tr className="grid grid-cols-6 gap-4 border-b border-gray-200 pb-2">

@@ -40,7 +40,7 @@ function App() {
         </div>
         <div className="col-span-full lg:col-span-8 flex flex-col gap-[30px] w-full">
           <div className="w-full overflow-auto">
-            <div className="min-w-[800px]">
+            <div className="min-w-[800px] my-10">
               <Filters
                 queryParams={queryParams}
                 handleFiltering={handleFiltering}
